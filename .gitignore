@@ -1,0 +1,13 @@
+# Godot 4+ specific ignores as sugested here:
+# https://docs.godotengine.org/en/4.4/tutorials/best_practices/version_control_systems.html
+.godot/
+*.translation
+
+# Obsidian specific folders and files
+_docs_rpgsys/.obsidian/workspace.json
+_docs_rpgsys/.obsidian/plugins/**
+
+# IDE related config
+.vscode/*
+# Hide those ugly .uid and .import files godot 4.6 is generating
+!.vscode/settings.json
