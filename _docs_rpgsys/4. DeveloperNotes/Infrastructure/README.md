@@ -1,0 +1,1 @@
+Pasta destinada a documentação de configurações na arquitetura/embiente do projeto

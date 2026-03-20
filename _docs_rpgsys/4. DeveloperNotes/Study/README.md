@@ -1,0 +1,1 @@
+Pasta para o registro do estudo feito no decorrer do projeto.

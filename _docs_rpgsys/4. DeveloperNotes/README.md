@@ -1,0 +1,1 @@
+Pasta para anotações do desenvolvedor. Contem documentos relativos à estudo, dificuldades tecnicas, anotaçõe/rascunho, planejamento de sistemas ainda não implementados
