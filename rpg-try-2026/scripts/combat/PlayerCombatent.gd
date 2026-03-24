@@ -1,12 +1,11 @@
 extends CombatentClass
 class_name  PlayerCombatent
 
-func initialize(data : PlayerCombatDataResource):
-	super.initialize(data.combatent)
-	return self
+func _init(data : PlayerCombatDataResource)-> void:
+	super._init(data.combatent)
 
 func setName(nm):
-	name = "Player " + nm
+	creaturename = "Player " + nm
 
 func choseAction(manager : TurnManager):
 	pass

@@ -17,9 +17,9 @@ var defenses : Array[DefensiveActionResource]
 
 func setName(nm):
 	var NAMES = ["Albert", "Bernard", "Carlos", "Danny", "Eric", "Frederic", "Garry"]
-	name = nm + " " + NAMES.pick_random()
+	creaturename = nm + " " + NAMES.pick_random()
 
-func initialize(resource : CombatentResource):
+func _init(resource : CombatentResource)-> void:
 	strength = resource.strength
 	speed = resource.speed
 
@@ -33,7 +33,6 @@ func initialize(resource : CombatentResource):
 	attacks = resource.attacks
 	defenses = resource.defenses
 	setName(resource.name)
-	return self
 
 func choseAction(manager : TurnManager):
 	# Refatorar para ser um metodo "Take turn"

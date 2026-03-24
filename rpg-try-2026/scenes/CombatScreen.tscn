@@ -23,10 +23,10 @@ grow_horizontal = 2
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 41.0
-offset_top = -80.0
-offset_right = 81.0
-offset_bottom = -40.0
+offset_left = 63.0
+offset_top = -291.0
+offset_right = 181.0
+offset_bottom = -138.0
 grow_vertical = 0
 
 [node name="Actions" type="HBoxContainer" parent="CombatDisplay" unique_id=1064256685]
@@ -36,8 +36,15 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -25.0
-offset_top = -62.0
+offset_top = -138.0
 offset_right = 15.0
-offset_bottom = -22.0
+offset_bottom = -98.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Label" type="Label" parent="." unique_id=1770377027]
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 159.0
+offset_bottom = 48.0
+text = "COMBAT SCREEN"

@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name CombatDisplay
 
 
@@ -19,11 +19,18 @@ func initialize(data : TurnManager) -> void:
 	enemycontainer = get_node("EnemySide")
 	playercontainer = get_node("PlayerSide")
 	actionsContainer = get_node("Actions")
+
+	# Create alies scenes
+	for alie in combatData.alies:
+		var playerscene = creatureInfoScene.instantiate()
+		playercontainer.add_child(playerscene)
+		playerscene.initialize(alie)
+
+	# Create enemies scenes
 	for enemyres in combatData.enemies:
-		var e = CombatentCLass.new(enemyres)
 		var infoscene = creatureInfoScene.instantiate()
-		infoscene.setCombatent(e)
-		actionsContainer.add_child(infoscene)
+		enemycontainer.add_child(infoscene)
+		infoscene.initialize(enemyres)
 
 
 func updateDisplay():
