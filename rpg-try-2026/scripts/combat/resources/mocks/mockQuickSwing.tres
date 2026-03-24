@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="OffensiveActionResource" format=3 uid="uid://bgmqns1pnki3s"]
+
+[ext_resource type="Script" uid="uid://fx4d1oixirfu" path="res://scripts/combat/resources/OfensiveActionResource.gd" id="1_epuax"]
+
+[resource]
+script = ExtResource("1_epuax")
+damage_bonus = 8
+speed_bonus = 5
+action_name = "Quick Swing"
+action_description = "Muita Stamina"
+stamina_cost = 10
+metadata/_custom_type_script = "uid://fx4d1oixirfu"

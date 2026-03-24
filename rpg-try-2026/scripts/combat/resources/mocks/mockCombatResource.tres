@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CombatMetadataResource" format=3 uid="uid://b001lh0nosqrx"]
+
+[ext_resource type="Script" uid="uid://s8e5mavmp8lc" path="res://scripts/combat/resources/CombatMetadataResource.gd" id="1_23uga"]
+
+[resource]
+script = ExtResource("1_23uga")
+is_surprise_attack = true
+metadata/_custom_type_script = "uid://s8e5mavmp8lc"

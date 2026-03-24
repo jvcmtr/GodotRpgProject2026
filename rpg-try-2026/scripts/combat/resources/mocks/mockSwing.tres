@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="OffensiveActionResource" format=3 uid="uid://mdgns6rkujk2"]
+
+[ext_resource type="Script" uid="uid://fx4d1oixirfu" path="res://scripts/combat/resources/OfensiveActionResource.gd" id="1_kjaj6"]
+
+[resource]
+script = ExtResource("1_kjaj6")
+damage_bonus = 5
+speed_bonus = 5
+action_name = "Swing"
+action_description = "Pouco Dano"
+stamina_cost = 5
+metadata/_custom_type_script = "uid://fx4d1oixirfu"

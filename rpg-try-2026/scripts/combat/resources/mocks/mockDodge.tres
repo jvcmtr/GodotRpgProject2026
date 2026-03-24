@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DefensiveActionResource" format=3 uid="uid://8xoeg5f76x5t"]
+
+[ext_resource type="Script" uid="uid://d1p3tyc4evjmb" path="res://scripts/combat/resources/DefensiveActionResource.gd" id="1_3fxx4"]
+
+[resource]
+script = ExtResource("1_3fxx4")
+speed_bonus = 4
+action_name = "Esquiva"
+action_description = "Capaz de evitar muito dano"
+stamina_cost = 6
+metadata/_custom_type_script = "uid://d1p3tyc4evjmb"

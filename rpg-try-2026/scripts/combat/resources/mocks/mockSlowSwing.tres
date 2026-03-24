@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="OffensiveActionResource" format=3 uid="uid://dt25f04j3xr5l"]
+
+[ext_resource type="Script" uid="uid://fx4d1oixirfu" path="res://scripts/combat/resources/OfensiveActionResource.gd" id="1_s421s"]
+
+[resource]
+script = ExtResource("1_s421s")
+damage_bonus = 8
+action_name = "Slow Swing"
+action_description = "Lento"
+stamina_cost = 5
+metadata/_custom_type_script = "uid://fx4d1oixirfu"

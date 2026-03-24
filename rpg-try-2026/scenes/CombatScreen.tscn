@@ -1,6 +1,43 @@
 [gd_scene format=3 uid="uid://cse7sl1snv6os"]
 
-[ext_resource type="Script" uid="uid://chx5ijjkovsnu" path="res://scripts/combat/combatScript.gd" id="1_ll575"]
+[ext_resource type="Script" uid="uid://d1majcyig3u4e" path="res://scripts/combat/TurnManager.gd" id="1_j4smu"]
+[ext_resource type="Script" uid="uid://chx5ijjkovsnu" path="res://scripts/combat/combatDisplayScript.gd" id="1_ll575"]
 
 [node name="CombatScreen" type="Node2D" unique_id=1868194670]
+script = ExtResource("1_j4smu")
+
+[node name="CombatDisplay" type="CanvasLayer" parent="." unique_id=761368655]
 script = ExtResource("1_ll575")
+
+[node name="EnemySide" type="HBoxContainer" parent="CombatDisplay" unique_id=1281992567]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.0
+offset_top = 23.0
+offset_right = -1.0
+offset_bottom = 63.0
+grow_horizontal = 2
+
+[node name="PlayerSide" type="HBoxContainer" parent="CombatDisplay" unique_id=1635164358]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = -80.0
+offset_right = 81.0
+offset_bottom = -40.0
+grow_vertical = 0
+
+[node name="Actions" type="HBoxContainer" parent="CombatDisplay" unique_id=1064256685]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -62.0
+offset_right = 15.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0

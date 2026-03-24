@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dg5iv58nxn4bh"]
+
+[ext_resource type="Texture2D" uid="uid://opy18wi4is71" path="res://assets/icon.svg" id="1_elpsq"]
+[ext_resource type="Script" uid="uid://vlvxpn08d5u4" path="res://scripts/combat/combatentInfoScene.gd" id="1_m6vjs"]
+
+[node name="Node2D" type="Node2D" unique_id=1614950115]
+script = ExtResource("1_m6vjs")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=501493647]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=41113570]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=517231305]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=793876806]
+layout_mode = 2
+text = "Unamed Enemy"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer" unique_id=1405504382]
+layout_mode = 2
+texture = ExtResource("1_elpsq")
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer" unique_id=1430193423]
+layout_mode = 2
+columns = 2
+
+[node name="HP" type="Label" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1341171702]
+layout_mode = 2
+text = "HP : "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1805034614]
+layout_mode = 2
+
+[node name="value" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer" unique_id=461292994]
+layout_mode = 2
+text = "-"
+
+[node name="slash" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer" unique_id=670250578]
+layout_mode = 2
+text = "/"
+
+[node name="max" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer" unique_id=595728064]
+layout_mode = 2
+text = "-"
+
+[node name="Stamina" type="Label" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=377749679]
+layout_mode = 2
+text = "Stamina : "
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1184343797]
+layout_mode = 2
+
+[node name="value" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=1419480353]
+layout_mode = 2
+text = "-"
+
+[node name="slash" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=144938959]
+layout_mode = 2
+text = "/"
+
+[node name="max" type="Label" parent="PanelContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=961643975]
+layout_mode = 2
+text = "-"

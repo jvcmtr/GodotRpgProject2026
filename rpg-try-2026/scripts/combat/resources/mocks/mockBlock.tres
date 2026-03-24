@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DefensiveActionResource" format=3 uid="uid://dagonyrbvl0mk"]
+
+[ext_resource type="Script" uid="uid://d1p3tyc4evjmb" path="res://scripts/combat/resources/DefensiveActionResource.gd" id="1_p4mu1"]
+
+[resource]
+script = ExtResource("1_p4mu1")
+damage_reduction = 6
+action_name = "Efetivo contra ataques rapidos"
+action_description = "7"
+metadata/_custom_type_script = "uid://d1p3tyc4evjmb"

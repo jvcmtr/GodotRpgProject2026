@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DefensiveActionResource" format=3 uid="uid://dam47gr15keby"]
+
+[ext_resource type="Script" uid="uid://d1p3tyc4evjmb" path="res://scripts/combat/resources/DefensiveActionResource.gd" id="1_gthd1"]
+
+[resource]
+script = ExtResource("1_gthd1")
+damage_reduction = 2
+speed_bonus = 2
+action_description = "Eficiente em termos de stamina"
+stamina_cost = 4
+metadata/_custom_type_script = "uid://d1p3tyc4evjmb"
