@@ -11,6 +11,7 @@ var player : CombatentClass
 var alies : Array[CombatentClass] = []
 var enemies : Array[CombatentClass] = []
 var combatents : Array[CombatentClass] = []
+var current_round : int = 0
 
 
 # ============== INITIALIZATION ===========================
@@ -36,7 +37,7 @@ func initCombatents():
 		alies.append(CombatentClass.new(x))
 	for x in encounter_res.enemies:
 		enemies.append(CombatentClass.new(x))
-	combatents = alies + [player] + enemie
+	combatents = alies + [player] + enemies
 	gdutils.sort_by(combatents, "speed", true)
 
 
@@ -65,7 +66,7 @@ func on_round_end():
 	pass
 
 func run_round():
-	var combatents = alies + [player] + enemie
+	var combatents = alies + [player] + enemies
 	combatents.sort
 	for c in combatents:
 		combatents.take_turn(TurnManager)

@@ -16,7 +16,7 @@ class_name CombatMetadataResource
 ## this is: check if each creature in a given team (alies/foes) is defeated. If so, that team loses.
 ## [b] ALL_ENEMIES_DEFEATED : [/b] If this option is chosen, check if each foes is defeated. If so, that team loses.
 ## The player (alies) team looses if the player itself is defeated, no matter how many allies it has left.
-@export var combat_win_condition_override : COMBAT.WIN_CONDITION_OVERRIDE = COMBAT.WIN_CONDITION_OVERRIDE.DEFAULT_VALUE
+@export var combat_win_condition_override : COMBAT.WIN_CONDITION_OVERRIDE.VALUES = COMBAT.WIN_CONDITION_OVERRIDE.DEFAULT_VALUE
 
 ## Determines weather or not there is a limit in rounds to the combat. If the limit is reached while no team is victorious, it is considered a tie
 ## [b] Default Value : [/b] [code] 0 [/code] means that the combat has no limit of turns
@@ -32,7 +32,7 @@ class_name CombatMetadataResource
 ## [b] LESS_DEFEATED_MEMBERS : [/b] Team with the most "dead" (defeated) enemies LOOSES
 ## [b] MOST_HP : [/b] Team of the creature with the current most hp wins
 ## [b] MOST_STAMINA : [/b] Team of the creature with the current most stamina wins
-@export var tie_breaker_rules : Array[COMBAT.TIE_BREAKER_RULE] = [COMBAT.TIE_BREAKER_RULE.DEFAULT_VALUE]
+@export var tie_breaker_rules : Array[COMBAT.TIE_BREAKER_RULE.VALUES] = [COMBAT.TIE_BREAKER_RULE.DEFAULT_VALUE]
 
 func get_combat_output(manager : TurnManager):
 	var state = COMBAT.WIN_CONDITION_OVERRIDE.CALL(combat_win_condition_override, manager.player, manager.alies, manager.enemies)
@@ -42,10 +42,10 @@ func get_combat_output(manager : TurnManager):
 		return _handle_tiebreak(state, manager)
 
 	# Se o limite de turnos chegou
-	if rounds_limit > 0 and TurnManager.rounds > rounds_limit:
+	if rounds_limit > 0 and manager.current_round > rounds_limit:
 		return _handle_tiebreak(COMBAT.OUTPUT.TIE, manager)
 
-	return COMBAT.OUTPUT.RUNING
+	return COMBAT.OUTPUT.RUNNING
 
 func _handle_tiebreak(output: COMBAT.OUTPUT, manager:TurnManager):
 	if not output == COMBAT.OUTPUT.TIE:

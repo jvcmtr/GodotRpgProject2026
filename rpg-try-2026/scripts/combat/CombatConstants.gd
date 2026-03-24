@@ -15,7 +15,7 @@ enum OUTPUT{
 # -------------------------------------------------------------------------------------------------------------------------------------------
 
 class WIN_CONDITION_OVERRIDE:
-	var DEFAULT_VALUE = VALUES.ALL_TEAM_DEFEATED
+	static var DEFAULT_VALUE = VALUES.ALL_TEAM_DEFEATED
 
 	enum VALUES{
 		## (default) If this option is chosen, keeps the default behaviour,
@@ -27,23 +27,23 @@ class WIN_CONDITION_OVERRIDE:
 		ALL_ENEMIES_DEFEATED
 	}
 
-	func MAP(value):
+	static func MAP(value):
 		return {
 		VALUES.ALL_TEAM_DEFEATED: __ALL_TEAM_DEFEATED,
 		VALUES.ALL_ENEMIES_DEFEATED: __ALL_ENEMIES_DEFEATED
 		}.get(value, DEFAULT_VALUE)
 
-	func CALL(value, player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func CALL(value, player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
 		return MAP(value).call(player, alies, enemies)
 
-	func __ALL_TEAM_DEFEATED(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __ALL_TEAM_DEFEATED(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
 		if enemies.all(func(a): a.is_defeated()):
 			return COMBAT.OUTPUT.WIN
 		if player.is_defeated() and alies.all(func(a): a.is_defeated()):
 			return COMBAT.OUTPUT.LOOSE
 		return COMBAT.OUTPUT.RUNNING
 
-	func __ALL_ENEMIES_DEFEATED(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __ALL_ENEMIES_DEFEATED(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
 		if enemies.all(func(a): a.is_defeated()):
 			return COMBAT.OUTPUT.WIN
 		if player.is_defeated():
@@ -55,7 +55,7 @@ class WIN_CONDITION_OVERRIDE:
 # -------------------------------------------------------------------------------------------------------------------------------------------
 
 class TIE_BREAKER_RULE:
-	var DEFAULT_VALUE = VALUES.NONE
+	static var DEFAULT_VALUE = VALUES.NONE
 
 	enum VALUES{
 		NONE, # COMBAT WILL BE CONSIDERED A TIE
@@ -74,7 +74,7 @@ class TIE_BREAKER_RULE:
 		#RANDOM
 	}
 
-	func MAP(value):
+	static func MAP(value):
 		return {
 			VALUES.NONE : _NONE,
 			VALUES.ALWAYS_PLAYER : __ALWAYS_PLAYER,
@@ -83,29 +83,29 @@ class TIE_BREAKER_RULE:
 			VALUES.MOST_STAMINA: __MOST_STAMINA
 		}.get(value, DEFAULT_VALUE)
 
-	func APPLY(rules: Array[TIE_BREAKER_RULE], player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func APPLY(rules: Array[TIE_BREAKER_RULE.VALUES], player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
 		for r in rules:
 			var result = MAP(r).call(player, alies, enemies)
 			if not result == COMBAT.OUTPUT.TIE:
 				return result
 		return MAP(DEFAULT_VALUE).call(player, alies, enemies)
 
-	func _NONE(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func _NONE(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
 		return COMBAT.OUTPUT.TIE
 
-	func __ALWAYS_PLAYER(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __ALWAYS_PLAYER(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
 		return COMBAT.OUTPUT.WIN
 
-	func _ALWAYS_ENEMY(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func _ALWAYS_ENEMY(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
 		return COMBAT.OUTPUT.LOOSE
 
-	func __MOST_HP(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __MOST_HP(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
 		return __ATTR_BASED(func(i): i.current_hp, player, alies, enemies)
 
-	func __MOST_STAMINA(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __MOST_STAMINA(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
 		return __ATTR_BASED(func(i): i.current_stamina, player, alies, enemies)
 
-	func __ATTR_BASED(selector, player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass], use_max=true) -> COMBAT.OUTPUT:
+	static func __ATTR_BASED(selector, player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass], use_max=true) -> COMBAT.OUTPUT:
 		var fn = max if use_max else min
 		var ally_group = alies + [player]
 
