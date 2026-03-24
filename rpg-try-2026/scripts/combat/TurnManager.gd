@@ -6,8 +6,11 @@ class_name TurnManager
 @export var combat_metadata : CombatMetadataResource
 
 var combatDisplay : CombatDisplay
+
+var player : CombatentClass
 var alies : Array[CombatentClass] = []
 var enemies : Array[CombatentClass] = []
+var combatents : Array[CombatentClass] = []
 
 
 # ============== INITIALIZATION ===========================
@@ -28,9 +31,13 @@ func initialize() -> TurnManager:
 	return self
 
 func initCombatents():
-	alies.append(PlayerCombatent.new(player_res))
+	player = PlayerCombatent.new(player_res)
+	for x in encounter_res.alies:
+		alies.append(CombatentClass.new(x))
 	for x in encounter_res.enemies:
 		enemies.append(CombatentClass.new(x))
+	combatents = alies + [player] + enemie
+	gdutils.sort_by(combatents, "speed", true)
 
 
 # ========================================== COMBAT STEPS ==========================================
@@ -39,19 +46,31 @@ func on_combat_start():
 func on_combat_end():
 	pass
 
+func has_combat_ended():
+	if player.is_defeated and alies.all(func(a):a.is_defeated()):
+		return true
+	if enemies.all(func(a): a.is_defeated()):
+		return true
+	else:
+		return false
 
-func on_turn_end():
-	pass
 func on_turn_start():
 	pass
-
-func on_round_end():
+func on_turn_end():
 	pass
+
 func on_round_start():
+	pass
+func on_round_end():
 	pass
 
 func run_round():
+	var combatents = alies + [player] + enemie
+	combatents.sort
+	for c in combatents:
+		combatents.take_turn(TurnManager)
 	pass
+
 func run_turn():
 	pass
 func run_action():
