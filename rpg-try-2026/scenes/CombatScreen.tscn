@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cse7sl1snv6os"]
 
 [ext_resource type="Script" uid="uid://d1majcyig3u4e" path="res://scripts/combat/TurnManager.gd" id="1_j4smu"]
-[ext_resource type="Script" uid="uid://chx5ijjkovsnu" path="res://scripts/combat/combatDisplayScript.gd" id="1_ll575"]
+[ext_resource type="Script" uid="uid://chx5ijjkovsnu" path="res://scripts/combat/CombatDisplayScript.gd" id="1_ll575"]
 [ext_resource type="Script" uid="uid://ds3vxn2gf1bj4" path="res://scripts/combat/resources/CombatentResource.gd" id="2_b5phj"]
 [ext_resource type="Script" uid="uid://bei5iyeddnniq" path="res://scripts/combat/resources/LootResource.gd" id="3_o7myu"]
 [ext_resource type="Script" uid="uid://dsqm68qttsis" path="res://scripts/combat/resources/EncounterResource.gd" id="4_mwsax"]
@@ -32,26 +32,36 @@ grow_horizontal = 2
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 63.0
-offset_top = -291.0
-offset_right = 181.0
-offset_bottom = -138.0
+offset_left = 72.0
+offset_top = -293.0
+offset_right = 190.0
+offset_bottom = -140.0
 grow_vertical = 0
 
-[node name="Actions" type="HBoxContainer" parent="CombatDisplay" unique_id=1064256685]
+[node name="PanelContainer" type="PanelContainer" parent="CombatDisplay" unique_id=850945514]
+offset_left = 637.0
+offset_top = 330.0
+offset_right = 677.0
+offset_bottom = 370.0
+
+[node name="ActionGroups" type="GridContainer" parent="CombatDisplay" unique_id=1084894386]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -25.0
-offset_top = -138.0
-offset_right = 15.0
-offset_bottom = -98.0
+offset_left = -178.0
+offset_top = -161.0
+offset_right = 540.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 2
+columns = 2
 
 [node name="Label" type="Label" parent="." unique_id=1770377027]
+visible = false
 offset_left = 21.0
 offset_top = 19.0
 offset_right = 159.0

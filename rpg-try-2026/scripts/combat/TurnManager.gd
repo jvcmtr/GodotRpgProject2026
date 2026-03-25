@@ -17,7 +17,6 @@ var current_round : int = 0
 # ============== INITIALIZATION ===========================
 
 func _ready() -> void:
-	print("initializing TurnManager")
 	self.initialize()
 
 func initialize() -> TurnManager:
@@ -37,7 +36,12 @@ func initCombatents():
 		alies.append(CombatentClass.new(x))
 	for x in encounter_res.enemies:
 		enemies.append(CombatentClass.new(x))
-	combatents = alies + [player] + enemies
+	# combatents is a Array[CombatentClass]
+	# alies is a Array[CombatentClass]
+	# enemies is a Array[CombatentClass]
+	# player is a CombatentClass
+	# [player] is a Array FUCK
+	combatents = alies + ([player] as Array[CombatentClass]) + enemies # FUCK GDSCRIPT INFERED TYPING.
 	gdutils.sort_by(combatents, "speed", true)
 
 

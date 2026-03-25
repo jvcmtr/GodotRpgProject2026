@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cjdq2xh712oul"]
+
+[ext_resource type="Script" uid="uid://b0rojld6wyn3n" path="res://ActionInfoButton.gd" id="1_cbrru"]
+
+[node name="Node2D" type="PanelContainer" unique_id=1358576189]
+custom_minimum_size = Vector2(100, 0)
+script = ExtResource("1_cbrru")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=175527517]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=209409586]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer" unique_id=67077223]
+layout_mode = 2
+text = "Unamed Action"
+
+[node name="Spacer" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1561235758]
+layout_mode = 2
+
+[node name="Properties" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=94594686]
+layout_mode = 2
+columns = 2
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1276388772]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.43529412)
+theme_override_font_sizes/font_size = 10
+text = "hvghvhfghfghfghfhgfghfhghfghfhfghghfghfghfh"
+autowrap_mode = 3

@@ -6,6 +6,7 @@
 script = ExtResource("1_gthd1")
 damage_reduction = 2
 speed_bonus = 2
+action_name = "Deflect"
 action_description = "Eficiente em termos de stamina"
 stamina_cost = 4
 metadata/_custom_type_script = "uid://d1p3tyc4evjmb"

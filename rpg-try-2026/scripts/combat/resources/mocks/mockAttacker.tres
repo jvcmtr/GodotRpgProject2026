@@ -11,10 +11,8 @@
 script = ExtResource("3_no5e4")
 name = "Attacker"
 max_hp = 20
-current_hp = 20
 max_stamina = 20
 stamina_regen = 5
-current_stamina = 20
 speed = 5
 strength = 5
 attacks = Array[ExtResource("1_bica6")]([ExtResource("2_awjb1"), ExtResource("3_xowdx")])

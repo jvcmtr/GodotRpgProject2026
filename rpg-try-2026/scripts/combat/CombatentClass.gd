@@ -47,3 +47,10 @@ func choseAction(manager : TurnManager):
 
 func choseDefense(manager : TurnManager):
 	return defenses.pick_random()
+
+# MOCK
+#TODO: Refatorar Actions para receber configurações do alvo
+#TODO: Refatorar para ActionGroups ser um resource.
+#TODO: Fazer com que actions possuam um conjunto de "Aplicabilidade". Se um grupo estiver vazio ele não vai ser aplicado
+func getActionGroups():
+	return [{"name":"Offensive" , "actions":attacks}, {"name":"Defensive" , "actions":defenses }]
