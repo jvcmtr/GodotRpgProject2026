@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cjdq2xh712oul"]
 
-[ext_resource type="Script" uid="uid://b0rojld6wyn3n" path="res://ActionInfoButton.gd" id="1_cbrru"]
+[ext_resource type="Script" uid="uid://b0rojld6wyn3n" path="res://scripts/combat/ActionButton.gd" id="1_bltqa"]
 
 [node name="Node2D" type="PanelContainer" unique_id=1358576189]
 custom_minimum_size = Vector2(100, 0)
-script = ExtResource("1_cbrru")
+script = ExtResource("1_bltqa")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=175527517]
 layout_mode = 2

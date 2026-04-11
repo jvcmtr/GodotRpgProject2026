@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b1r545ivwv5kj"]
+
+[ext_resource type="Script" uid="uid://dlpmn1dxjpk7i" path="res://scripts/combat/ActionSet.gd" id="1_6kogr"]
+
+[node name="CombatActionsScene" type="Control" unique_id=405886801]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6kogr")
+
+[node name="ActionsList" type="HBoxContainer" parent="." unique_id=693904940]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 48.0

@@ -10,3 +10,5 @@ class_name ActionResource
 
 @export var requires_equipment : bool
 @export var consumes_item : bool
+@export var group : SKILLS.GROUPS
+@export var turn_behaviour : SKILLS.TURN_BEHAVIOUR

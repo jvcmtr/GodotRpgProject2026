@@ -4,57 +4,47 @@ class_name CombatDisplay
 
 @export var combatData : TurnManager
 
-var creatureInfoScene = preload("res://scenes/CombatentInfo.tscn")
-var actionButtonScene = preload("res://scenes/ActionButton.tscn")
+var creatureInfoScene = preload("res://scenes/combat/CombatantCard.tscn")
 
-var enemycontainer : Container
-var playercontainer : Container
-var actionsgroupscontainer : Container
+@onready var actionsSet : ActionSet = $CombatActionsScene
+@onready var enemycontainer : Container = $EnemySide
+@onready var playercontainer : Container = $PlayerSide
 
-var player_data : CombatentClass
-var Enemies : Array[CombatentClass]
+var combatants_map: Dictionary[CombatantClass, CombatantCard] = {}
 
-var combatents_map = {}
-var actionsmap = {}
 
-var currentTurn = 0
-
+# ================================== INITIALIZATION ==================================
 func initialize(data : TurnManager) -> void:
 	combatData = data
-	enemycontainer = get_node("EnemySide")
-	playercontainer = get_node("PlayerSide")
-	actionsgroupscontainer = get_node("ActionGroups")
 
-	registerCombatentInfocard(data.player, playercontainer)
-	registerActions(data.player)
-	for alie in combatData.alies:
-		registerCombatentInfocard(alie, playercontainer)
-	for enemy in combatData.enemies:
+	for allie in combatData.get_allies():
+		registerCombatentInfocard(allie, playercontainer)
+		focusOn(allie)
+	for enemy in combatData.get_allies():
 		registerCombatentInfocard(enemy, enemycontainer)
 
-func registerCombatentInfocard(combatent : CombatentClass, container : Container):
+func registerCombatentInfocard(combatant : CombatantClass, container : Container):
 		var scene = creatureInfoScene.instantiate()
 		container.add_child(scene)
-		scene.initialize(combatent)
-		combatents_map[scene] = combatent
+		scene.initialize(combatant)
+		combatants_map[combatant] = scene
 
-func registerActions(combatent: CombatentClass):
-	for g in combatent.getActionGroups():
-		var label = Label.new()
-		label.text = g["name"]
-		actionsgroupscontainer.add_child(label)
+# ================================= OPERATION ========================================
+func get_card(combatant : CombatantClass) -> CombatantCard:
+	return combatants_map[combatant]
 
-	for g in combatent.getActionGroups():
-		var container = HBoxContainer.new()
-		container.add_theme_constant_override("Separation", 7)
-		actionsgroupscontainer.add_child(container)
+func focusOn(combatant: CombatantClass):
+	pass
 
-		for a in g["actions"]:
-			var scene = actionButtonScene.instantiate()
-			container.add_child(scene)
-			scene.initialize(a)
-			actionsmap[scene] = a
+# Called when is a Player Characters turn
+# Returns (as a callback) an action/target he wishes to perform
+# What about fleeing????
+# on_action_chosen_event should have Skill and Target
+func actorsTurnMode(combatant: CombatantClass, on_action_chosen_event : Callable):
+	pass
 
-
-func focusOn():
+# Called when a Player Character is being attacked
+# Returns as a callback the action used for defending
+# HACK: Attack should be a class
+func defendingTurnMode(attack , defender: CombatantClass , on_action_chosen_event : Callable):
 	pass

@@ -2,16 +2,18 @@
 
 [ext_resource type="Script" uid="uid://d1majcyig3u4e" path="res://scripts/combat/TurnManager.gd" id="1_j4smu"]
 [ext_resource type="Script" uid="uid://chx5ijjkovsnu" path="res://scripts/combat/CombatDisplayScript.gd" id="1_ll575"]
-[ext_resource type="Script" uid="uid://ds3vxn2gf1bj4" path="res://scripts/combat/resources/CombatentResource.gd" id="2_b5phj"]
-[ext_resource type="Script" uid="uid://bei5iyeddnniq" path="res://scripts/combat/resources/LootResource.gd" id="3_o7myu"]
+[ext_resource type="Script" uid="uid://ds3vxn2gf1bj4" path="res://scripts/combat/resources/CombatantResource.gd" id="2_ijayh"]
+[ext_resource type="Script" uid="uid://bei5iyeddnniq" path="res://scripts/combat/resources/LootResource.gd" id="3_wtbd4"]
 [ext_resource type="Script" uid="uid://dsqm68qttsis" path="res://scripts/combat/resources/EncounterResource.gd" id="4_mwsax"]
+[ext_resource type="PackedScene" uid="uid://b1r545ivwv5kj" path="res://scenes/combat/ActionSet.tscn" id="6_ijayh"]
 
 [sub_resource type="Resource" id="Resource_aldo0"]
 script = ExtResource("4_mwsax")
 metadata/_custom_type_script = "uid://dsqm68qttsis"
 
-[node name="CombatScreen" type="Node2D" unique_id=1868194670]
-position = Vector2(0, 8)
+[node name="CombatScreen" type="Control" unique_id=1826397491]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_j4smu")
 encounter_res = SubResource("Resource_aldo0")
 
@@ -19,49 +21,43 @@ encounter_res = SubResource("Resource_aldo0")
 script = ExtResource("1_ll575")
 
 [node name="EnemySide" type="HBoxContainer" parent="CombatDisplay" unique_id=1281992567]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -41.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -65.0
 offset_top = 23.0
-offset_right = -1.0
+offset_right = -25.0
 offset_bottom = 63.0
-grow_horizontal = 2
+grow_horizontal = 0
 
 [node name="PlayerSide" type="HBoxContainer" parent="CombatDisplay" unique_id=1635164358]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 72.0
-offset_top = -293.0
-offset_right = 190.0
-offset_bottom = -140.0
-grow_vertical = 0
+offset_left = 27.0
+offset_top = 19.0
+offset_right = 145.0
+offset_bottom = 172.0
 
 [node name="PanelContainer" type="PanelContainer" parent="CombatDisplay" unique_id=850945514]
-offset_left = 637.0
-offset_top = 330.0
-offset_right = 677.0
-offset_bottom = 370.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="ActionGroups" type="GridContainer" parent="CombatDisplay" unique_id=1084894386]
+[node name="CombatActionsScene" parent="CombatDisplay" unique_id=405886801 instance=ExtResource("6_ijayh")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -178.0
-offset_top = -161.0
-offset_right = 540.0
-offset_bottom = -22.0
-grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 2
-columns = 2
 
 [node name="Label" type="Label" parent="." unique_id=1770377027]
-visible = false
+layout_mode = 0
 offset_left = 21.0
 offset_top = 19.0
 offset_right = 159.0

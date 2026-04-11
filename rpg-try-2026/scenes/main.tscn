@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnwhg4hh3al5u"]
 
-[ext_resource type="PackedScene" uid="uid://cse7sl1snv6os" path="res://scenes/CombatScreen.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://cse7sl1snv6os" path="res://scenes/combat/CombatScreen.tscn" id="1_o5qli"]
 [ext_resource type="Resource" uid="uid://d4mxxja61yhf4" path="res://scripts/combat/resources/mocks/mockEncounterResource.tres" id="2_tefeu"]
 [ext_resource type="Resource" uid="uid://duub4dvqcsf7m" path="res://scripts/combat/resources/mocks/mockAttacker.tres" id="3_o6xl0"]
 [ext_resource type="Script" uid="uid://bn4q0vkvom8l8" path="res://scripts/combat/resources/ItemResource.gd" id="5_choun"]

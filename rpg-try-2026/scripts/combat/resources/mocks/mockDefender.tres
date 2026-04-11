@@ -1,22 +1,26 @@
-[gd_resource type="Resource" script_class="CombatentResource" format=3 uid="uid://dm7dga43hn2ta"]
+[gd_resource type="Resource" script_class="CombatantResource" format=3 uid="uid://dm7dga43hn2ta"]
 
 [ext_resource type="Script" uid="uid://fx4d1oixirfu" path="res://scripts/combat/resources/OfensiveActionResource.gd" id="1_xvgcn"]
 [ext_resource type="Script" uid="uid://d1p3tyc4evjmb" path="res://scripts/combat/resources/DefensiveActionResource.gd" id="2_5j5pm"]
 [ext_resource type="Resource" uid="uid://dt25f04j3xr5l" path="res://scripts/combat/resources/mocks/mockSlowSwing.tres" id="2_kkp5b"]
 [ext_resource type="Resource" uid="uid://mdgns6rkujk2" path="res://scripts/combat/resources/mocks/mockSwing.tres" id="3_dtvhd"]
-[ext_resource type="Script" uid="uid://ds3vxn2gf1bj4" path="res://scripts/combat/resources/CombatentResource.gd" id="3_ks4gl"]
+[ext_resource type="Script" uid="uid://ds3vxn2gf1bj4" path="res://scripts/combat/resources/CombatantResource.gd" id="3_ks4gl"]
+[ext_resource type="Script" uid="uid://b7d0t5uqey4n7" path="res://scripts/combat/resources/RandomDecisionMakerResource.gd" id="4_dtvhd"]
 [ext_resource type="Resource" uid="uid://dagonyrbvl0mk" path="res://scripts/combat/resources/mocks/mockBlock.tres" id="5_1s7qc"]
+
+[sub_resource type="Resource" id="Resource_1s7qc"]
+script = ExtResource("4_dtvhd")
+metadata/_custom_type_script = "uid://b7d0t5uqey4n7"
 
 [resource]
 script = ExtResource("3_ks4gl")
 name = "Full Defender"
 max_hp = 20
-current_hp = 20
 max_stamina = 20
 stamina_regen = 5
-current_stamina = 20
 speed = 5
 strength = 5
 attacks = Array[ExtResource("1_xvgcn")]([ExtResource("2_kkp5b"), ExtResource("3_dtvhd")])
 defenses = Array[ExtResource("2_5j5pm")]([ExtResource("5_1s7qc")])
+decision_maker = SubResource("Resource_1s7qc")
 metadata/_custom_type_script = "uid://ds3vxn2gf1bj4"

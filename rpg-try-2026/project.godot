@@ -20,6 +20,7 @@ config/icon="res://assets/icon.svg"
 
 gdutils="*uid://20cyv4828b2h"
 COMBAT="*uid://pyejjh5qs86q"
+SKILLS="*uid://cosxy5be2sstw"
 
 [display]
 

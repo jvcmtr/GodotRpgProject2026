@@ -1,14 +1,26 @@
 extends Node
 # COMBAT CONSTANTS:
 
+enum TEAMS {
+	ALLIES,
+	FOES,
+}
+
 enum OUTPUT{
 	RUNNING, # Combat still running
-	WIN, # Player won combat
-	LOOSE, # Player lost combat
+	WIN, # Allies won combat
+	LOOSE, # Allies lost combat
 	TIE, # Tied combat
 	FLEE, # Player fled combat
-	ESCAPED # Enemy escaped combat
+	ESCAPED # Foes escaped combat
 }
+const OUTPUT_DEFAULT = OUTPUT.TIE
+
+# Determina quantas vezes o TurnManager vai perguntar se um combatente pode jogar.
+# Se receber X nãos seguidos ele encerra o combate como um empate
+const MAXIMUM_SKIPPED_TURNS = 99
+
+const MAXIMUM_ROUNDS = 999
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 #                                                    WIN CONDITION OVERRIDE
@@ -33,17 +45,17 @@ class WIN_CONDITION_OVERRIDE:
 		VALUES.ALL_ENEMIES_DEFEATED: __ALL_ENEMIES_DEFEATED
 		}.get(value, DEFAULT_VALUE)
 
-	static func CALL(value, player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func CALL(value, player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass]) -> COMBAT.OUTPUT:
 		return MAP(value).call(player, alies, enemies)
 
-	static func __ALL_TEAM_DEFEATED(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __ALL_TEAM_DEFEATED(player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass]) -> COMBAT.OUTPUT:
 		if enemies.all(func(a): a.is_defeated()):
 			return COMBAT.OUTPUT.WIN
 		if player.is_defeated() and alies.all(func(a): a.is_defeated()):
 			return COMBAT.OUTPUT.LOOSE
 		return COMBAT.OUTPUT.RUNNING
 
-	static func __ALL_ENEMIES_DEFEATED(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __ALL_ENEMIES_DEFEATED(player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass]) -> COMBAT.OUTPUT:
 		if enemies.all(func(a): a.is_defeated()):
 			return COMBAT.OUTPUT.WIN
 		if player.is_defeated():
@@ -83,29 +95,29 @@ class TIE_BREAKER_RULE:
 			VALUES.MOST_STAMINA: __MOST_STAMINA
 		}.get(value, DEFAULT_VALUE)
 
-	static func APPLY(rules: Array[TIE_BREAKER_RULE.VALUES], player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func APPLY(rules: Array[TIE_BREAKER_RULE.VALUES], player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass]) -> COMBAT.OUTPUT:
 		for r in rules:
 			var result = MAP(r).call(player, alies, enemies)
 			if not result == COMBAT.OUTPUT.TIE:
 				return result
 		return MAP(DEFAULT_VALUE).call(player, alies, enemies)
 
-	static func _NONE(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func _NONE(player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass]) -> COMBAT.OUTPUT:
 		return COMBAT.OUTPUT.TIE
 
-	static func __ALWAYS_PLAYER(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __ALWAYS_PLAYER(player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass]) -> COMBAT.OUTPUT:
 		return COMBAT.OUTPUT.WIN
 
-	static func _ALWAYS_ENEMY(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func _ALWAYS_ENEMY(player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass]) -> COMBAT.OUTPUT:
 		return COMBAT.OUTPUT.LOOSE
 
-	static func __MOST_HP(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __MOST_HP(player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass]) -> COMBAT.OUTPUT:
 		return __ATTR_BASED(func(i): i.current_hp, player, alies, enemies)
 
-	static func __MOST_STAMINA(player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass]) -> COMBAT.OUTPUT:
+	static func __MOST_STAMINA(player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass]) -> COMBAT.OUTPUT:
 		return __ATTR_BASED(func(i): i.current_stamina, player, alies, enemies)
 
-	static func __ATTR_BASED(selector, player:CombatentClass, alies: Array[CombatentClass], enemies :Array[CombatentClass], use_max=true) -> COMBAT.OUTPUT:
+	static func __ATTR_BASED(selector, player:CombatantClass, alies: Array[CombatantClass], enemies :Array[CombatantClass], use_max=true) -> COMBAT.OUTPUT:
 		var fn = max if use_max else min
 		var ally_group = alies + [player]
 

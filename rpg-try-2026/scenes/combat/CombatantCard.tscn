@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dg5iv58nxn4bh"]
 
-[ext_resource type="Texture2D" uid="uid://opy18wi4is71" path="res://assets/icon.svg" id="1_elpsq"]
-[ext_resource type="Script" uid="uid://vlvxpn08d5u4" path="res://scripts/combat/CombatentInfoScene.gd" id="1_m6vjs"]
+[ext_resource type="Script" uid="uid://vlvxpn08d5u4" path="res://scripts/combat/CombatantInfoScene.gd" id="1_e8mpq"]
+[ext_resource type="Texture2D" uid="uid://opy18wi4is71" path="res://assets/icon.svg" id="2_km46w"]
 
 [node name="Node2D" type="PanelContainer" unique_id=1101261862]
 custom_minimum_size = Vector2(125, 0)
 offset_right = 200.0
 offset_bottom = 281.0
-script = ExtResource("1_m6vjs")
+script = ExtResource("1_e8mpq")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=41113570]
 layout_mode = 2
@@ -25,7 +25,7 @@ text = "Unamed Enemy"
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1405504382]
 layout_mode = 2
-texture = ExtResource("1_elpsq")
+texture = ExtResource("2_km46w")
 expand_mode = 4
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=1430193423]

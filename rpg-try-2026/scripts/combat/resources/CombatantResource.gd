@@ -1,7 +1,7 @@
 extends Resource
 
 # Mock for Enemy / Player data
-class_name CombatentResource
+class_name CombatantResource
 
 @export var name : String
 
@@ -15,3 +15,4 @@ class_name CombatentResource
 
 @export var attacks : Array[OffensiveActionResource]
 @export var defenses : Array[DefensiveActionResource]
+@export var decision_maker: IDecisionMaker

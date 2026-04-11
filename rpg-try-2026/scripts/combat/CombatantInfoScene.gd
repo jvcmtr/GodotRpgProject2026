@@ -1,6 +1,7 @@
 extends PanelContainer
+class_name CombatantCard
 
-@onready var combatentClass : CombatentClass
+@onready var combatentClass : CombatantClass
 
 @onready var hpval = $MarginContainer/VBoxContainer/GridContainer/HBoxContainer/value
 @onready var hpmax = $MarginContainer/VBoxContainer/GridContainer/HBoxContainer/max
@@ -9,7 +10,7 @@ extends PanelContainer
 @onready var enemyname = $MarginContainer/VBoxContainer/Label
 @onready var enemysprite = $MarginContainer/VBoxContainer/TextureRect
 
-func initialize(combatent : CombatentClass):
+func initialize(combatent : CombatantClass):
 	combatentClass = combatent
 	enemysprite.texture =  load("res://assets/icon.svg") #combatentClass.sprite ||
 	enemyname.text = combatentClass.creaturename

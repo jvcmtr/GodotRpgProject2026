@@ -1,8 +1,8 @@
-extends CombatentClass
-class_name  PlayerCombatent
+extends CombatantClass
+class_name  PlayerCombatant
 
 func _init(data : PlayerCombatDataResource)-> void:
-	super._init(data.combatent)
+	super._init(data.combatent, COMBAT.TEAMS.ALLIES)
 
 func setName(nm):
 	creaturename = "Player " + nm
