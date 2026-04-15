@@ -19,8 +19,9 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 gdutils="*uid://20cyv4828b2h"
-COMBAT="*uid://pyejjh5qs86q"
-SKILLS="*uid://cosxy5be2sstw"
+COMBAT="uid://pyejjh5qs86q"
+SKILLS="uid://cosxy5be2sstw"
+CONSTANTS="uid://cluxt0nbk4s3v"
 
 [display]
 

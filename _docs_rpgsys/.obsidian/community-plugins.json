@@ -1,5 +1,6 @@
 [
   "settings-search",
   "emoji-shortcodes",
-  "gdscript-syntax-highlighting"
+  "gdscript-syntax-highlighting",
+  "callout-manager"
 ]

@@ -1,7 +1,7 @@
 extends Control
-class_name ActionSet
+class_name CombatActionUIControlls
 
-var actionButtonScene = preload("res://scenes/combat/ActionButton.tscn")
+var actionButtonScene = preload("res://scenes/combat/SkillActionButton.tscn")
 
 var actions_list : Container
 

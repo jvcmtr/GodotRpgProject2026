@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1r545ivwv5kj"]
 
-[ext_resource type="Script" uid="uid://dlpmn1dxjpk7i" path="res://scripts/combat/ActionSet.gd" id="1_6kogr"]
+[ext_resource type="Script" uid="uid://dlpmn1dxjpk7i" path="res://scripts/combat/display/CombatActionUIControlls.gd" id="1_6kogr"]
 
 [node name="CombatActionsScene" type="Control" unique_id=405886801]
 layout_mode = 3

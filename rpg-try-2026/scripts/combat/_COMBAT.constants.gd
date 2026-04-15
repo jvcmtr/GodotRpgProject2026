@@ -1,5 +1,6 @@
 extends Node
 # COMBAT CONSTANTS:
+class_name COMBAT
 
 enum TEAMS {
 	ALLIES,
@@ -26,7 +27,19 @@ const MAXIMUM_ROUNDS = 999
 #                                                    WIN CONDITION OVERRIDE
 # -------------------------------------------------------------------------------------------------------------------------------------------
 
+# TODO: Refactor this logic so it also handles enemies fleeing.
+# Just as enemy has a method .is_defeated() they should have a method .is_in_combat()
+# Possible causes for not being in combat: 
+# 	Fleeing, 
+#	Summoned creature was unsumoned, 
+#	Summoned creature creator was defeated
+#	surrendering, 
+#	being desintegrated,
+#	being banished???? (maybe a status effect that removes a creature from combat during a few turns)
+
 class WIN_CONDITION_OVERRIDE:
+
+
 	static var DEFAULT_VALUE = VALUES.ALL_TEAM_DEFEATED
 
 	enum VALUES{
@@ -130,3 +143,4 @@ class TIE_BREAKER_RULE:
 			return COMBAT.OUTPUT.WIN
 		else:
 			return COMBAT.OUTPUT.LOOSE
+

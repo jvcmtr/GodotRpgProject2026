@@ -3,6 +3,9 @@ How to setup:
 - dotnet (we might need)
 - godot
 
+> [!warning]
+> This is already outdated. C# / dotnet is not being used
+
 ---
 
 # Linux

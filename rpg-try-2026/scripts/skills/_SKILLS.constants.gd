@@ -1,4 +1,5 @@
 extends Node
+class_name SKILLS
 # SKILLS CONSTANTS:
 
 enum GROUPS {
@@ -26,4 +27,4 @@ class TARGETS:
 		SELF,
 		ANY
 	}
-	var max_targets: int 
+	var max_targets: int = 1
