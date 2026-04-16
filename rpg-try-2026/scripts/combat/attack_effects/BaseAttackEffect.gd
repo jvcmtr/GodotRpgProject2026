@@ -18,12 +18,12 @@ var visuals : Array[AttackEffectVisuals]
 
 func _init(_type, _targets, _source_combatant, _source_skill, _source_action, _values, _visuals):
     type = _type
-    targets = _targets
+    targets.assign( _targets) # FUCK GDSCRIPT
     source_combatant = _source_combatant
     source_skill = _source_skill
     source_action = _source_action
     effect_values = _values
-    visuals = _visuals
+    visuals = [_visuals] as Array[AttackEffectVisuals]
     pass
 
 func resolve(gamestate: TurnManager):

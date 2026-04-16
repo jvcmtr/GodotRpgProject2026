@@ -23,6 +23,10 @@ COMBAT="uid://pyejjh5qs86q"
 SKILLS="uid://cosxy5be2sstw"
 CONSTANTS="uid://cluxt0nbk4s3v"
 
+[debug]
+
+gdscript/warnings/enable=false
+
 [display]
 
 window/size/initial_position_type=3
@@ -30,6 +34,10 @@ window/size/initial_position_type=3
 [dotnet]
 
 project/assembly_name="RpgTry2026"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
 
 [physics]
 

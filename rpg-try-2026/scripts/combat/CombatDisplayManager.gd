@@ -6,7 +6,7 @@ class_name CombatDisplayManager
 
 var creatureInfoScene = preload("res://scenes/combat/CombatantCard.tscn")
 
-@onready var actionsSet : CombatActionUIControlls = $CombatActionsScene
+@onready var actionsSet : SkillUIControlls = $CombatActionsScene
 @onready var enemycontainer : Container = $EnemySide
 @onready var playercontainer : Container = $PlayerSide
 
@@ -19,7 +19,7 @@ func initialize(data : TurnManager) -> void:
 
 	for allie in combatData.get_allies():
 		registerCombatentInfocard(allie, playercontainer)
-	for enemy in combatData.get_allies():
+	for enemy in combatData.get_foes():
 		registerCombatentInfocard(enemy, enemycontainer)
 
 func registerCombatentInfocard(combatant : CombatantClass, container : Container):
@@ -36,10 +36,11 @@ func get_card(combatant : CombatantClass) -> CombatantCard:
 # ================================= INPUT HANDLING ========================================
 var buffer := MultiactionDisplayBuffer.new(self)
 
-func choose_action(combatant : CombatantClass, callback : Callable):
+func display_action_choice(combatant : CombatantClass, callback : Callable):
+	print("CALLING BUFFER")
 	buffer.register_choose_action_call(combatant, callback)
 
-func choose_reaction(combatant : CombatantClass, action : BaseCombatAction, callback : Callable):
+func display_reaction_choice(combatant : CombatantClass, action : BaseCombatAction, callback : Callable):
 	buffer.register_choose_reaction_call(combatant, action, callback)
 
 
@@ -53,6 +54,8 @@ func on_turn_start(combatant : CombatantClass):
 	pass
 
 func display_possible_actions(combatant : CombatantClass, callback : Callable):
+	print("CALLING ACTIONS")
+	actionsSet.display_reactions(combatant.get_reaction_skills(), null)
 	# Add skip_turn and flee buttons !!!
 
 	# Focus the combatant card
@@ -65,6 +68,8 @@ func display_possible_actions(combatant : CombatantClass, callback : Callable):
 
 
 func display_possible_reactions(combatant : CombatantClass, action : BaseCombatAction, callback : Callable):
+	print("CALLING REACTIONS")
+	actionsSet.display_reactions(combatant.get_reaction_skills(), action)
 	# Add no_action (skip reaciton) button
 
 	# we should probabli add some buffer to this, because if multiple playable characters are on screen, this might be called multiple times in a row.
@@ -78,4 +83,3 @@ func display_possible_reactions(combatant : CombatantClass, action : BaseCombatA
 	# Display the possible reactions
 	# On click, calls callback (no targeting or other inputs required)
 	pass
-

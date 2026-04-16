@@ -8,6 +8,8 @@ class_name CombatMetadataResource
 # - CombatConditions (se é ataque surpresa, quais os efeitos do ambiente/clima etc...)
 
 # MOCKED
+const MAXIMUM_SKIPPED_TURNS = 99
+const MAXIMUM_ROUNDS = 99
 @export var is_surprise_attack : bool
 @export var is_allowed_preparation : bool
 
@@ -42,7 +44,8 @@ var OUTPUT_DEFAULT = COMBAT.OUTPUT_DEFAULT
 
 # =========================== METHODS ==========================================
 func get_combat_output(manager : TurnManager):
-	var state = COMBAT.WIN_CONDITION_OVERRIDE.CALL(combat_win_condition_override, manager.player, manager.alies, manager.enemies)
+	# FIXME assigning player as allies[0] is just wrong. should refactor the rules config
+	var state = COMBAT.WIN_CONDITION_OVERRIDE.CALL(combat_win_condition_override, manager.get_allies()[0], manager.get_allies(), manager.get_foes())
 
 	# Se o combate já foi finalizado
 	if not state == COMBAT.OUTPUT.RUNNING:
@@ -58,4 +61,6 @@ func get_combat_output(manager : TurnManager):
 func _handle_tiebreak(output: COMBAT.OUTPUT, manager:TurnManager):
 	if not output == COMBAT.OUTPUT.TIE:
 		return output
-	return COMBAT.TIE_BREAKER_RULE.APPLY(tie_breaker_rules, manager.player, manager.alies, manager.enemies)
+
+	# FIXME assigning player as allies[0] is just wrong. should refactor the rules config
+	return COMBAT.TIE_BREAKER_RULE.APPLY(tie_breaker_rules, manager.get_allies()[0], manager.get_allies(), manager.get_foes())

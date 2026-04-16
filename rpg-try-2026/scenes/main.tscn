@@ -4,7 +4,6 @@
 [ext_resource type="Resource" uid="uid://d4mxxja61yhf4" path="res://scripts/combat/resources/mocks/mockEncounterResource.tres" id="2_tefeu"]
 [ext_resource type="Resource" uid="uid://duub4dvqcsf7m" path="res://scripts/combat/resources/mocks/mockAttacker.tres" id="3_o6xl0"]
 [ext_resource type="Script" uid="uid://bn4q0vkvom8l8" path="res://scripts/combat/resources/ItemResource.gd" id="5_choun"]
-[ext_resource type="Resource" uid="uid://b001lh0nosqrx" path="res://scripts/combat/resources/mocks/mockCombatResource.tres" id="6_tipki"]
 [ext_resource type="Script" uid="uid://epeuexk8wpdv" path="res://scripts/combat/resources/PlayerCombatDataResource.gd" id="6_ya4ey"]
 
 [sub_resource type="GDScript" id="GDScript_tefeu"]
@@ -32,4 +31,3 @@ script = SubResource("GDScript_tefeu")
 [node name="CombatScreen" parent="." unique_id=1868194670 instance=ExtResource("1_o5qli")]
 encounter_res = ExtResource("2_tefeu")
 player_res = SubResource("Resource_85g3d")
-combat_metadata = ExtResource("6_tipki")

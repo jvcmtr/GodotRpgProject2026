@@ -11,7 +11,7 @@ signal combat_finished(result: int)
 # EXPORT VARS
 @export_group("Resources")
 @export var encounter_res: EncounterResource
-@export var player_res: PlayerCombatDataResource
+@export var player_res: CombatantResource
 @export var combat_rules: CombatMetadataResource
 
 # COMPOSITION
@@ -41,18 +41,19 @@ func initialize() -> void:
 
 	_setup_entities()
 	combat_display.initialize(self)
-	actions_manager.initialize(self) 
+	actions_manager.initialize(self)
+	start_combat()
 
 func _setup_entities() -> void:
 	_combatants.clear()
 	
-	_combatants.append( PlayerCombatant.new(player_res) )
+	_combatants.append( CombatantClass.new(player_res, COMBAT.TEAMS.ALLIES, self) )
 	
 	for res in encounter_res.allies:
-		_combatants.append(CombatantClass.new(res, COMBAT.TEAMS.ALLIES))
+		_combatants.append(CombatantClass.new(res, COMBAT.TEAMS.ALLIES, self))
 	
 	for res in encounter_res.enemies:
-		_combatants.append(CombatantClass.new(res, COMBAT.TEAMS.FOES))
+		_combatants.append(CombatantClass.new(res, COMBAT.TEAMS.FOES, self))
 
 	_combatants.sort_custom(func(a, b): return a.speed > b.speed)
 
@@ -60,6 +61,7 @@ func _setup_entities() -> void:
 # ================= TURN LOGIC =============================
 
 func start_combat() -> void:
+	print("COMBAT STARTED")
 	if _combatants.size() < 2:
 		end_combat(COMBAT.OUTPUT.WIN)
 		return
@@ -71,6 +73,7 @@ func start_combat() -> void:
 ## Default logic for starting the next turn.
 ## Called at the end of every turn or when the round starts
 func _process_turn_cycle(skipped_count: int = 0) -> void:
+	print("PROCESSING TURN CYCLE")
 	if skipped_count >= combat_rules.MAXIMUM_SKIPPED_TURNS:
 		end_combat(combat_rules.OUTPUT_DEFAULT)
 		return
@@ -95,6 +98,7 @@ func _check_round_changed():
 
 ## Starts combatant turn OR return false if hes not able
 func _try_take_turn(combatant: CombatantClass):
+	print("TRYING TO TAKE TURN")
 	if combatant and combatant.should_take_turn():
 		_turn_count += 1
 		turn_started.emit(combatant)

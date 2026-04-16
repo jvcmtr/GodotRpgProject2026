@@ -1,8 +1,12 @@
 extends Node
 class_name BaseCombatAction
 
-# ========================== PROPERTIES ==========================
-var status = COMBAT_ACTIONS.RESOLVED_STATUS
+var status : COMBAT_ACTIONS.RESOLVED_STATUS
+
+func _init() -> void:
+	status = COMBAT_ACTIONS.RESOLVED_STATUS.UNRESOLVED
+
+# ========================== API =================================
 
 # The following methods exist as variables so that external sources can override them
 ## Runs when an action succeeds

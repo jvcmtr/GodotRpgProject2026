@@ -15,13 +15,13 @@ var attacks : Array[Skill]
 var defenses : Array[Skill]
 
 var TEAM : COMBAT.TEAMS
-var decision_maker : IDecisionMaker
+var decision_maker : DecisionMakerClass
 
 func setName(nm):
 	var NAMES = ["Albert", "Bernard", "Carlos", "Danny", "Eric", "Frederic", "Garry"]
 	creaturename = nm + " " + NAMES.pick_random()
 
-func _init(resource : CombatantResource, team: COMBAT.TEAMS)-> void:
+func _init(resource : CombatantResource, team: COMBAT.TEAMS, gamestate : TurnManager)-> void:
 	setName(resource.name)
 	strength = resource.strength
 	speed = resource.speed
@@ -31,22 +31,23 @@ func _init(resource : CombatantResource, team: COMBAT.TEAMS)-> void:
 	current_stamina = resource.max_stamina
 	stamina_regen = resource.stamina_regen
 
-	attacks.assign(resource.attacks.map( func(x): Skill.new(SkillTemplate.new(x), self) )) 
-	defenses.assign(resource.defenses.map( func(x): Skill.new(SkillTemplate.new(x), self) ))
+	attacks.assign( resource.attacks.map(  func(x): return Skill.new(SkillTemplate.new(x), self) )) 
+	defenses.assign(resource.defenses.map( func(x): return Skill.new(SkillTemplate.new(x), self) ))
 	
 	TEAM = team
-	decision_maker = resource.decision_maker
+	# FIXME decisionmaker inicialization should not be made this way
+	resource.decision_maker.initialize(self, gamestate)
+	decision_maker = DecisionMakerClass.new( resource.decision_maker, self, gamestate)
 
-# =============== CONTROL METHODS ==========================
+# =============== API ==========================
+
+#		CONTROL
 func is_defeated():
 	return current_hp <= 0
 	
 func should_take_turn():
-	return ! is_defeated()
+	return not is_defeated()
 
-
-
-# =============== FUNCTIONALITY ==========================
 
 func take_turn(game_state : TurnManager, callback : Callable):
 	print( str(TEAM) + " " + creaturename + " turn has started")
@@ -55,18 +56,22 @@ func take_turn(game_state : TurnManager, callback : Callable):
 
 	# HACK: Instead of doing this, deisionmaker should say when its done taking actions
 	# TODO USE async!!!!!!!
-	var attack = decision_maker.choose_action(game_state)
+	print("TURN START")
+	var attack = decision_maker.choose_action(game_state, func(x): 
+		print("Ataque escolhido : " + str(x))
+		callback.call()
+	)
 	
-	callback.call() # endturn
 
-# ================ PROPERTY ACCESS ======================
-func get_skills() -> Array[Skill]:
+#		SKILLS
+func get_all_skills() -> Array[Skill]:
 	return attacks + defenses
 
-func get_possible_actions():
+func get_actions_skills():
 	# HACK: should include actions like item uses, flee, spells etc...
-	return attacks.map(func (x): x.as_action())
+	return attacks
 
-func get_possible_reaction(action : BaseCombatAction):
+func get_reaction_skills():
 	# HACK: should include reactions like item uses, spells etc...
-	return defenses.map(func (x): x.as_reaction())
+	return defenses
+	

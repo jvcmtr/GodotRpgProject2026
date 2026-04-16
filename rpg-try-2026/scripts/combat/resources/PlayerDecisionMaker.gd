@@ -3,7 +3,8 @@ class_name PlayerDecisionMakerResource
 
 # MOCK
 func choose_action(gamestate : TurnManager, callback : Callable):
-	gamestate.combat_display.choose_action(actor, callback)
+	print("PLAYER DECISIONMAKER")
+	gamestate.combat_display.display_action_choice(actor, callback)
 
 func chose_reaction(gamestate : TurnManager, action : BaseCombatAction, callback : Callable):
-	gamestate.combat_display.choose_reaction(actor, action, callback)
+	gamestate.combat_display.display_reaction_choice(actor, action, callback)

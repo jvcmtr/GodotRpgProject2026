@@ -11,11 +11,13 @@ class_name  IDecisionMaker
 
 var actor : CombatantClass
 
-func _init(combatant : CombatantClass, gamestate:TurnManager):
+func initialize(combatant : CombatantClass, gamestate:TurnManager):
 	actor = combatant
 
 func chose_action(gamestate : TurnManager, callback : Callable) -> BaseCombatAction:
+	push_error("NON IMPLEMENTED AI")
 	return null
 
 func chose_reaction(gamestate : TurnManager, action : BaseCombatAction, callback : Callable) -> BaseCombatReaction:
+	push_error("NON IMPLEMENTED AI")
 	return null
