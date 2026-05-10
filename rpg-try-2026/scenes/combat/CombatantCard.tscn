@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://dg5iv58nxn4bh"]
 
 [ext_resource type="Script" uid="uid://vlvxpn08d5u4" path="res://scripts/combat/display/CombatantInfoScene.gd" id="1_e8mpq"]
-[ext_resource type="Texture2D" uid="uid://opy18wi4is71" path="res://assets/icon.svg" id="2_km46w"]
+[ext_resource type="Theme" uid="uid://cq21x5u6qrvrv" path="res://assets/theme/mock_theme.tres" id="1_km46w"]
+[ext_resource type="Texture2D" uid="uid://bdvgbjyok3nfd" path="res://assets/mocks/combat/06341a247f5c7041a84210265b74f5b2.png" id="3_km46w"]
 
 [node name="Node2D" type="PanelContainer" unique_id=1101261862]
 custom_minimum_size = Vector2(125, 0)
 offset_right = 200.0
 offset_bottom = 281.0
+theme = ExtResource("1_km46w")
 script = ExtResource("1_e8mpq")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=41113570]
@@ -25,7 +27,7 @@ text = "Unamed Enemy"
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1405504382]
 layout_mode = 2
-texture = ExtResource("2_km46w")
+texture = ExtResource("3_km46w")
 expand_mode = 4
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=1430193423]

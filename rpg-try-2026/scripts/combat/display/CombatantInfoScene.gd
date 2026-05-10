@@ -12,7 +12,7 @@ class_name CombatantCard
 
 func initialize(combatent : CombatantClass):
 	combatentClass = combatent
-	enemysprite.texture =  load("res://assets/icon.svg") #combatentClass.sprite ||
+	#	enemysprite.texture =  load("res://assets/icon.svg") #combatentClass.sprite ||
 	enemyname.text = combatentClass.creaturename
 	staminamax.text = str(combatentClass.max_stamina)
 	hpmax.text = str(combatentClass.max_hp)

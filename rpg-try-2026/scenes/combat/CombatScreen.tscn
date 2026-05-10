@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://b001lh0nosqrx" path="res://scripts/combat/resources/mocks/mockCombatResource.tres" id="6_34ew0"]
 [ext_resource type="Resource" uid="uid://btjylwulp3cgj" path="res://scripts/combat/resources/mocks/PlayerCombatantData.tres" id="6_ghn7i"]
 [ext_resource type="PackedScene" uid="uid://b1r545ivwv5kj" path="res://scenes/combat/CombatActionUIControlls.tscn" id="6_ijayh"]
+[ext_resource type="Theme" uid="uid://cq21x5u6qrvrv" path="res://assets/theme/mock_theme.tres" id="10_ghn7i"]
 
 [sub_resource type="Resource" id="Resource_aldo0"]
 script = ExtResource("4_mwsax")
@@ -18,6 +19,8 @@ metadata/_custom_type_script = "uid://dsqm68qttsis"
 [node name="CombatScreen" type="Control" unique_id=1826397491]
 layout_mode = 3
 anchors_preset = 0
+offset_top = -2.0
+offset_bottom = -2.0
 script = ExtResource("1_j4smu")
 encounter_res = SubResource("Resource_aldo0")
 player_res = ExtResource("6_ghn7i")
@@ -68,4 +71,5 @@ offset_left = 21.0
 offset_top = 19.0
 offset_right = 159.0
 offset_bottom = 48.0
+theme = ExtResource("10_ghn7i")
 text = "COMBAT SCREEN"

@@ -5,7 +5,7 @@ var actionButtonScene = preload("res://scenes/combat/SkillActionButton.tscn")
 
 # FIXME STOP using this type of node reference... use unique name instead
 @onready var panel : PanelContainer = $ActionsGroupDisplay
-@onready var actions_list : Container = $ActionsGroupDisplay/VBoxContainer/ActionsList
+@onready var actions_list : Container = $ActionsGroupDisplay/VBoxContainer/MarginContainer/ActionsList
 @onready var group_label : Label = $ActionsGroupDisplay/VBoxContainer/Label
 
 var character : CombatantClass

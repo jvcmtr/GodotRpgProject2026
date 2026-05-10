@@ -1,0 +1,22 @@
+[gd_resource type="Theme" format=3 uid="uid://cq21x5u6qrvrv"]
+
+[ext_resource type="Texture2D" uid="uid://gfby4kvjdmnf" path="res://assets/mocks/custom_background_2.jpg" id="1_fumpq"]
+[ext_resource type="FontFile" uid="uid://gbvc2fijy185" path="res://assets/theme/fonts/Matrix Bold/Matrix Bold.ttf" id="2_fumpq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fumpq"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+texture = ExtResource("1_fumpq")
+texture_margin_left = 40.0
+texture_margin_top = 40.0
+texture_margin_right = 40.0
+texture_margin_bottom = 40.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color(0.22654828, 0.2533519, 0.21984738, 1)
+
+[resource]
+default_font = ExtResource("2_fumpq")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_fumpq")
