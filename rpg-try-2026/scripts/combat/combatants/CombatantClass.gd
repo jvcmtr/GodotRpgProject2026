@@ -56,8 +56,7 @@ func take_turn(game_state : TurnManager, callback : Callable):
 
 	# HACK: Instead of doing this, deisionmaker should say when its done taking actions
 	# TODO USE async!!!!!!!
-	print("TURN START")
-	var attack = decision_maker.choose_action(game_state, func(x): 
+	var attack = decision_maker.choose_action(game_state, func(x ): 
 		print("Ataque escolhido : " + str(x))
 		callback.call()
 	)

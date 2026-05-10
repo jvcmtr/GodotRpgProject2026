@@ -12,3 +12,18 @@ class_name ActionResource
 @export var consumes_item : bool
 @export var group : SKILLS.GROUPS
 @export var turn_behaviour : SKILLS.TURN_BEHAVIOUR
+
+@export var targeting_mode: SKILLS.TARGETS._POOL
+@export var max_number_of_targets: int
+
+
+func filter_targets(actor : CombatantClass, combatants : Array[CombatantClass] ) -> Array[CombatantClass]:
+
+    if targeting_mode == SKILLS.TARGETS._POOL.ALLIES:
+        return combatants.filter( func(c): c.TEAM != actor.TEAM)
+    if targeting_mode == SKILLS.TARGETS._POOL.ENEMIES:
+        return combatants.filter( func(c): return c.TEAM == actor.TEAM)
+    if targeting_mode == SKILLS.TARGETS._POOL.ANY:
+        return combatants
+    return combatants
+        

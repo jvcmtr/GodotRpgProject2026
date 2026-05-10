@@ -17,14 +17,27 @@ var data : Array[Dictionary]
 
 # IDEA - maybe the display reactions method should only display the skills.
 # in this case, each skill would see if it can be performed via the latest action in the ActionsManagerStack
-func display_reactions(list : Array[Skill] , trigger_action : BaseCombatAction  ):
+func display_reactions(list : Array[Skill] , trigger_action : BaseCombatAction, on_selected : Callable  ):
+	_reset()
 	_load_actions(list, trigger_action)
 	_refresh_display()
+	_register_callback(on_selected)
+
+func display_actions(list : Array[Skill], on_selected : Callable  ):
+	_reset()
+	_load_actions(list, null)
+	_refresh_display()
+	_register_callback(on_selected)
 
 # ================================= PRIVATE ==========================================
 
+func _reset():
+	data.clear()
+	for child in actions_list.get_children():
+		child.queue_free()
+
 ## Sets the `data` property with the skills formated in a group
-func _load_actions(list : Array[Skill], action : BaseCombatAction):
+func _load_actions(list : Array[Skill], source_action : BaseCombatAction):
 	var categories = {}
 
 	for skill in list:
@@ -34,7 +47,9 @@ func _load_actions(list : Array[Skill], action : BaseCombatAction):
 	
 	var dt = []
 	for key in categories:
-		var valid_actions = categories[key].filter(func(x): return x.can_react_to(action) )
+		var valid_actions = categories[key]
+		if source_action:
+			valid_actions = categories[key].filter(func(x): return x.can_react_to(source_action) )
 		if valid_actions.is_empty():
 			continue
 		var info = COMBAT_UI.ACTION_GROUPS_DATA[key].duplicate() # duplicate() not needed, its here just to be safe
@@ -59,7 +74,15 @@ func _refresh_display():
 	pass
 	
 
-	
+func _register_callback(callback : Callable):
+	print("Callback registered")
+	for scene in actions_list.get_children():
+		scene.on_skill_selected.connect(func(x): 
+			print("!!!!")
+			callback.call(x)
+		)
+
+
 
 #func registerActions(combatent: CombatantClass):
 	#for g in combatent.getActionGroups():
