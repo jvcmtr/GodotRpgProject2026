@@ -53,9 +53,6 @@ func _gui_input(event: InputEvent) -> void:
 			# FIXME: Bug when click and mouse leaves
 			modulate = Color.from_rgba8(255, 255, 200, 255)
 			get_tree().create_timer(0.1).timeout.connect(func(): modulate = Color.from_rgba8(255, 255, 0, 255) )
-			
-			print("Container was clicked!")
-			print(on_skill_selected.has_connections())
-			# print(on_skill_selected.is_connected() )
+			print("chosen skill: " + skill.name)
 			on_skill_selected.emit(skill)
 			accept_event()

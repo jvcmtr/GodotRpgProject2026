@@ -17,12 +17,18 @@ class_name MultiactionDisplayBuffer
 # ===========================================================
 
 
+
 var display_manager: CombatDisplayManager
-var _stack: Array[Dictionary] = []
+var _queue: Array[Dictionary] = []
 var _is_waiting_for_ui: bool = false
 
 func _init(dm: CombatDisplayManager):
     display_manager = dm
+
+# THIS CLASS ENDED UP DOING SOMETHING DIFERENT THAN WHAT WAS NEEDDED (my fault)
+# The actual correct way to go about this is by simplly queuing the requests
+# I actualy messed up on "actions" (managed and resolved by the actions manager, witch operates with a queue
+# and "action_requests" witch happen when the player's decisionmaker asks the UI for an input, this should happend sequentialy (FIFO style)
 
 # ================== EXTERNAL METHODS ==========================
 
@@ -30,71 +36,63 @@ func register_choose_action_call(combatant: CombatantClass, callback: Callable):
     var new_entry = {
         "ACTOR": combatant,
         "CALLBACK": callback,
-        "REACTIONS": [],
         "TYPE": "ACTION"
     }
-    _stack.append(new_entry)
-    
-    # If we were busy with a reaction, the new action takes priority.
-    # We "interrupt" by simply calling the processing logic again.
+    _queue.append(new_entry)
     _process_next_priority()
 
 func register_choose_reaction_call(combatant: CombatantClass, action: BaseCombatAction, callback: Callable):
-    for entry in _stack:
-        if entry.get("ACTION_REF") == action:
-            entry["REACTIONS"].append({
-                "ACTOR": combatant,
-                "CALLBACK": callback,
-                "TYPE": "REACTION",
-                "TARGET_ACTION": action
-            })
-            break
-    
+    var new_entry = {
+        "ACTOR": combatant,
+        "CALLBACK": callback,
+        "TYPE": "REACTION",
+        "TARGET_ACTION": action
+    }
+    _queue.append(new_entry)
     _process_next_priority()
 
 # ================== CORE LOGIC ========================
 
 func _process_next_priority():
-    if _stack.is_empty():
+    if _queue.is_empty():
         _is_waiting_for_ui = false
         return
 
-    var current_action_entry = _stack.back()
-
-    # 1. Handle Reactions for THIS action first (FIFO)
-    if not current_action_entry["REACTIONS"].is_empty():
-        var reaction_req = current_action_entry["REACTIONS"].front()
-        _trigger_ui_reaction(reaction_req)
+    var next_entry = _queue.pop_front()
+    if next_entry["TYPE"] == "ACTION":
+        _trigger_ui_action(next_entry)
+        return 
+        
+    if next_entry["TYPE"] == "REACTION":
+        _trigger_ui_reaction(next_entry)
         return
 
-    # 2. If no reactions, handle the Action itself
-    _trigger_ui_action(current_action_entry)
-
+    push_error("UNRECOGNIZED ENTRY AT CombatDisplayManager buffer (MultiactionDisplayBuffer) - ENTRY:\n" + str(next_entry))
 
 # ================== CALLS TO DisplayManager =================
 
 func _trigger_ui_action(entry: Dictionary):
     _is_waiting_for_ui = true
+    
     display_manager.display_possible_actions(entry["ACTOR"], func(chosen_action):
         # 1. UI is done, remove the request from our stack
-        _stack.erase(entry) 
+        _queue.erase(entry) 
         # 2. Fire the original callback (allows system to declare/resolve)
         entry["CALLBACK"].call(chosen_action)
         # 3. Look for the next thing to do
         _process_next_priority()
     )
 
-func _trigger_ui_reaction(reaction_req: Dictionary):
+func _trigger_ui_reaction(entry: Dictionary):
     _is_waiting_for_ui = true
     display_manager.display_possible_reactions(
-        reaction_req["ACTOR"], 
-        reaction_req["TARGET_ACTION"], 
+        entry["ACTOR"], 
+        entry["TARGET_ACTION"], 
         func(chosen_reaction):
             # 1. Remove this specific reaction from the queue
-            var current_action_entry = _stack.back()
-            current_action_entry["REACTIONS"].erase(reaction_req)
+            _queue.erase(entry) 
             # 2. Fire callback
-            reaction_req["CALLBACK"].call(chosen_reaction)
+            entry["CALLBACK"].call(chosen_reaction)
             # 3. Check for next priority
             _process_next_priority()
     )

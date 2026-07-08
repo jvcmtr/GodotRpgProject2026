@@ -56,8 +56,8 @@ func take_turn(game_state : TurnManager, callback : Callable):
 
 	# HACK: Instead of doing this, deisionmaker should say when its done taking actions
 	# TODO USE async!!!!!!!
-	var attack = decision_maker.choose_action(game_state, func(x ): 
-		print("Ataque escolhido : " + str(x))
+	var attack = decision_maker.choose_action(game_state, func(x): 
+		print(creaturename + ", Ataque escolhido : " + str(x))
 		callback.call()
 	)
 	
@@ -74,3 +74,10 @@ func get_reaction_skills():
 	# HACK: should include reactions like item uses, spells etc...
 	return defenses
 	
+
+# =========================== COMBAT SPECIFIC =============================
+func take_hit(val):
+	#MOCK
+	current_hp -= val
+	if current_hp < 0:
+		current_hp = 0

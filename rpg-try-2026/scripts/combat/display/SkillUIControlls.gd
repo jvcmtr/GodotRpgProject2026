@@ -63,7 +63,6 @@ func _load_actions(list : Array[Skill], source_action : BaseCombatAction):
 func _refresh_display():
 	# MOCK
 	# HACK: this only displays one skill group, witch is fine just as a mock
-	print(data)
 	for group in data:
 		group_label.text = group["NAME"]
 		
@@ -75,28 +74,10 @@ func _refresh_display():
 	
 
 func _register_callback(callback : Callable):
-	print("Callback registered")
 	for scene in actions_list.get_children():
-		scene.on_skill_selected.connect(func(x): 
-			print("!!!!")
-			callback.call(x)
-		)
+		if scene.on_skill_selected.is_connected(callback):
+			scene.on_skill_selected.disconnect(callback)
+		scene.on_skill_selected.connect(callback)
 
 
 
-#func registerActions(combatent: CombatantClass):
-	#for g in combatent.getActionGroups():
-		#var label = Label.new()
-		#label.text = g["name"]
-		#actions_list.add_child(label)
-#
-	#for g in combatent.getActionGroups():
-		#var container = HBoxContainer.new()
-		#container.add_theme_constant_override("Separation", 500)
-		#actions_list.add_child(container)
-#
-		#for a in g["actions"]:
-			#var scene = actionButtonScene.instantiate()
-			#container.add_child(scene)
-			#scene.initialize(a)
-			#actions_list[scene] = a

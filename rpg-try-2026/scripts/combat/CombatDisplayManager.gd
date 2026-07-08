@@ -59,7 +59,7 @@ func on_turn_start(combatant : CombatantClass):
 	pass
 
 func display_possible_actions(combatant : CombatantClass, callback : Callable):
-	print("CALLING ACTIONS")
+	print("CALLING UI ACTIONS (" + combatant.creaturename + ")")
 	current_callback = callback
 	current_focus_actor = combatant
 	is_reaction = false
@@ -76,13 +76,13 @@ func display_possible_actions(combatant : CombatantClass, callback : Callable):
 
 
 func display_possible_reactions(combatant : CombatantClass, action : BaseCombatAction, callback : Callable):
-	print("CALLING REACTIONS")
+	print("CALLING UI REACTIONS (" + combatant.creaturename + ")")
 	is_reaction = true
 	current_callback = callback
 	current_focus_actor = combatant
 	actionsSet.display_reactions(combatant.get_reaction_skills(), action, on_action_selected )
 
-	# we should probabli add some timer to serve as a buffer to this. if multiple playable characters are on screen, this might be called multiple times in a row.
+	# we should probably add some timer to serve as a buffer to this. if multiple playable characters are on screen, this might be called multiple times in a row.
 	# if change_display_animation hasnt started, start it
 	# when change_display_animation ended, only then we actualy load the character information
 	# This way we will have the animation duration as a buffer
@@ -94,22 +94,24 @@ func display_possible_reactions(combatant : CombatantClass, action : BaseCombatA
 	pass
 
 func on_action_selected(skill : Skill):
-	print("On action selected - CombatDisplayManager")
 	current_selected_action = skill
 	_try_resolve_skill()
 	
 
 func _try_resolve_skill():
-	print("Trying to resolve action/reaction")
 	var res = current_selected_action.get_data()
 	var possible_targets = res.filter_targets(current_focus_actor, combatData.get_combatants())
 
 	if res.max_number_of_targets >= possible_targets.size():
 		current_targets = possible_targets
 	
-	if current_targets.size() == res.max_number_of_targets:
+	# HACK: Reactions do not always have max number of targets because most of the time 
+	# they target a action (not an actor). Thats why we check if the value is 0
+	if res.max_number_of_targets == 0 or current_targets.size() == res.max_number_of_targets:
 		if is_reaction:
+			print("Selected skill is reaction")
 			current_callback.call(current_selected_action.as_reaction())
 		else:
+			print("Selected skill is not reaction")
 			current_callback.call(current_selected_action.as_action(current_targets))
 	pass

@@ -8,6 +8,7 @@ var _defenses : Array[BaseCombatDefense]
 func _init(attacker : CombatantClass, attack_effects : Array[BaseAttackEffect]):
     _attacker = attacker
     _effects = attack_effects
+    super(attacker) # FIXME : Unescessary???? SHould this be on the base class
 
 # ===================== METHODS ======================
 ## Handles when a defense is declared against this attack

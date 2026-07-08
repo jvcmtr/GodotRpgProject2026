@@ -20,9 +20,9 @@ class_name ActionResource
 func filter_targets(actor : CombatantClass, combatants : Array[CombatantClass] ) -> Array[CombatantClass]:
 
     if targeting_mode == SKILLS.TARGETS._POOL.ALLIES:
-        return combatants.filter( func(c): c.TEAM != actor.TEAM)
+        return combatants.filter( func(c): c.TEAM == actor.TEAM)
     if targeting_mode == SKILLS.TARGETS._POOL.ENEMIES:
-        return combatants.filter( func(c): return c.TEAM == actor.TEAM)
+        return combatants.filter( func(c): return c.TEAM != actor.TEAM)
     if targeting_mode == SKILLS.TARGETS._POOL.ANY:
         return combatants
     return combatants

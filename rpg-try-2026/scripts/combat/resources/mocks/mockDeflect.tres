@@ -9,4 +9,5 @@ speed_bonus = 2
 action_name = "Deflect"
 action_description = "Eficiente em termos de stamina"
 stamina_cost = 4
+turn_behaviour = 1
 metadata/_custom_type_script = "uid://d1p3tyc4evjmb"

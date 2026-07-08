@@ -2,9 +2,11 @@ extends Node
 class_name BaseCombatAction
 
 var status : COMBAT_ACTIONS.RESOLVED_STATUS
+var actor : CombatantClass # Most likely unescessary coupling????
 
-func _init() -> void:
+func _init(_actor : CombatantClass) -> void:
 	status = COMBAT_ACTIONS.RESOLVED_STATUS.UNRESOLVED
+	actor = _actor 
 
 # ========================== API =================================
 
@@ -76,3 +78,4 @@ func _on_fail_default(gamestate : TurnManager):
 
 func _on_finish_default(gamestate : TurnManager):
 	push_error("CombatAction.gd : ON EITHER METHOD NOT IMPLEMENTED")
+	

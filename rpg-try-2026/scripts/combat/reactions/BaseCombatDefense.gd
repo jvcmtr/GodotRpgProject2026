@@ -7,7 +7,7 @@ var _stamina_cost : int
 
 # =========================== INITIALIZATION =======================================================
 func _init(_actor : CombatantClass, stamina_cost :int, effects : Array[BaseDefenseEffect]):
-	super(actor)
+	super(_actor)
 	_stamina_cost = stamina_cost
 	_effects = effects
 
@@ -25,7 +25,7 @@ func defend_against(attack : AttackCombatAction, gamestate : TurnManager ):
 	# Calls defend_against_effect for every suitable effect in the attack
 	for a_effect in attack._effects:
 		for d_effect in _effects:
-			d_effect.apply_to_effect(a_effect, attack._attacker, a_effect.targets)
+			d_effect.apply_to(a_effect, attack._attacker, a_effect.targets)
 
 func _on_trigger(_actor : CombatantClass, attack : AttackCombatAction, gamestate : TurnManager):
 	## HACK: Stamina consuption should be a defense effect.

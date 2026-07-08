@@ -20,6 +20,7 @@ signal combat_finished(result: int)
 
 
 # INTERNAL STATE
+var _player_ref: CombatantClass
 var _combatants: Array[CombatantClass] = []
 var _current_combatant: CombatantClass:
 	get: return null if _combatants.is_empty() else _combatants[_current_idx]
@@ -47,7 +48,8 @@ func initialize() -> void:
 func _setup_entities() -> void:
 	_combatants.clear()
 	
-	_combatants.append( CombatantClass.new(player_res, COMBAT.TEAMS.ALLIES, self) )
+	_player_ref = CombatantClass.new(player_res, COMBAT.TEAMS.ALLIES, self) 
+	_combatants.append( _player_ref )
 	
 	for res in encounter_res.allies:
 		_combatants.append(CombatantClass.new(res, COMBAT.TEAMS.ALLIES, self))
@@ -73,6 +75,8 @@ func start_combat() -> void:
 ## Default logic for starting the next turn.
 ## Called at the end of every turn or when the round starts
 func _process_turn_cycle(skipped_count: int = 0) -> void:
+	print("")
+	print("___________________________")
 	print("PROCESSING TURN CYCLE")
 	if skipped_count >= combat_rules.MAXIMUM_SKIPPED_TURNS:
 		end_combat(combat_rules.OUTPUT_DEFAULT)
@@ -145,11 +149,11 @@ func end_combat(result: int) -> void:
 
 
 # ================== PROPERTY ACCESS ====================
-func get_allies() -> Array[CombatantClass]: 
-	return _combatants.filter(func(x): return x.TEAM == COMBAT.TEAMS.ALLIES)
+func get_allies(combatant : CombatantClass = _player_ref) -> Array[CombatantClass]: 
+	return _combatants.filter(func(x): return x.TEAM == combatant.TEAM)
 
-func get_foes() -> Array[CombatantClass]: 
-	return _combatants.filter(func(x): return x.TEAM == COMBAT.TEAMS.FOES)
+func get_foes(combatant : CombatantClass = _player_ref) -> Array[CombatantClass]: 
+	return _combatants.filter(func(x): return x.TEAM != combatant.TEAM)
 
 func get_combatants() -> Array[CombatantClass]:
 	return _combatants
