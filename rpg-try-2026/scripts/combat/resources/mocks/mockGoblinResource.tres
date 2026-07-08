@@ -5,10 +5,15 @@
 [ext_resource type="Script" uid="uid://d1p3tyc4evjmb" path="res://scripts/combat/resources/DefensiveActionResource.gd" id="2_f1d66"]
 [ext_resource type="Script" uid="uid://bei5iyeddnniq" path="res://scripts/combat/resources/LootResource.gd" id="3_1y4x7"]
 [ext_resource type="Resource" uid="uid://mdgns6rkujk2" path="res://scripts/combat/resources/mocks/mockSwing.tres" id="3_8rasx"]
+[ext_resource type="Script" uid="uid://b7d0t5uqey4n7" path="res://scripts/combat/resources/RandomDecisionMakerResource.gd" id="4_8rasx"]
 [ext_resource type="Script" uid="uid://bn4q0vkvom8l8" path="res://scripts/combat/resources/ItemResource.gd" id="4_riltw"]
 [ext_resource type="Script" uid="uid://cv2v64bn15rcc" path="res://scripts/combat/resources/EnemyResource.gd" id="5_6cwnc"]
 [ext_resource type="Resource" uid="uid://8xoeg5f76x5t" path="res://scripts/combat/resources/mocks/mockDodge.tres" id="5_x6ut4"]
 [ext_resource type="Resource" uid="uid://dam47gr15keby" path="res://scripts/combat/resources/mocks/mockDeflect.tres" id="6_07pw8"]
+
+[sub_resource type="Resource" id="Resource_07pw8"]
+script = ExtResource("4_8rasx")
+metadata/_custom_type_script = "uid://b7d0t5uqey4n7"
 
 [sub_resource type="Resource" id="Resource_8rasx"]
 script = ExtResource("4_riltw")
@@ -55,12 +60,11 @@ possible_loot = Array[ExtResource("3_1y4x7")]([SubResource("Resource_x6ut4"), Su
 behaviour = "Random"
 name = "Goblin"
 max_hp = 20
-current_hp = 20
 max_stamina = 20
 stamina_regen = 5
-current_stamina = 20
 speed = 2
 strength = 2
 attacks = Array[ExtResource("1_34xqc")]([ExtResource("2_6cwnc"), ExtResource("3_8rasx")])
 defenses = Array[ExtResource("2_f1d66")]([ExtResource("5_x6ut4"), ExtResource("6_07pw8")])
+decision_maker = SubResource("Resource_07pw8")
 metadata/_custom_type_script = "uid://cv2v64bn15rcc"

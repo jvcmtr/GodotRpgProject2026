@@ -1,22 +1,26 @@
-[gd_resource type="Resource" script_class="CombatentResource" format=3 uid="uid://b2qhqcnmm1iwn"]
+[gd_resource type="Resource" script_class="CombatantResource" format=3 uid="uid://b2qhqcnmm1iwn"]
 
 [ext_resource type="Script" uid="uid://fx4d1oixirfu" path="res://scripts/combat/resources/OfensiveActionResource.gd" id="1_8doe1"]
 [ext_resource type="Script" uid="uid://d1p3tyc4evjmb" path="res://scripts/combat/resources/DefensiveActionResource.gd" id="2_48m6h"]
 [ext_resource type="Resource" uid="uid://bgmqns1pnki3s" path="res://scripts/combat/resources/mocks/mockQuickSwing.tres" id="2_ti5au"]
-[ext_resource type="Script" uid="uid://ds3vxn2gf1bj4" path="res://scripts/combat/resources/CombatentResource.gd" id="3_c57wt"]
+[ext_resource type="Script" uid="uid://ds3vxn2gf1bj4" path="res://scripts/combat/resources/CombatantResource.gd" id="3_c57wt"]
 [ext_resource type="Resource" uid="uid://mdgns6rkujk2" path="res://scripts/combat/resources/mocks/mockSwing.tres" id="3_tkhca"]
+[ext_resource type="Script" uid="uid://b7d0t5uqey4n7" path="res://scripts/combat/resources/RandomDecisionMakerResource.gd" id="4_tkhca"]
 [ext_resource type="Resource" uid="uid://8xoeg5f76x5t" path="res://scripts/combat/resources/mocks/mockDodge.tres" id="5_r61ov"]
+
+[sub_resource type="Resource" id="Resource_r61ov"]
+script = ExtResource("4_tkhca")
+metadata/_custom_type_script = "uid://b7d0t5uqey4n7"
 
 [resource]
 script = ExtResource("3_c57wt")
 name = "Speedster"
 max_hp = 20
-current_hp = 20
 max_stamina = 20
 stamina_regen = 5
-current_stamina = 20
 speed = 5
 strength = 5
 attacks = Array[ExtResource("1_8doe1")]([ExtResource("2_ti5au"), ExtResource("3_tkhca")])
 defenses = Array[ExtResource("2_48m6h")]([ExtResource("5_r61ov")])
+decision_maker = SubResource("Resource_r61ov")
 metadata/_custom_type_script = "uid://ds3vxn2gf1bj4"

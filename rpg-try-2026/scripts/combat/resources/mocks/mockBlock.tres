@@ -7,4 +7,6 @@ script = ExtResource("1_p4mu1")
 damage_reduction = 6
 action_name = "Efetivo contra ataques rapidos"
 action_description = "7"
+group = 1
+turn_behaviour = 1
 metadata/_custom_type_script = "uid://d1p3tyc4evjmb"

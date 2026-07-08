@@ -1,4 +1,4 @@
-extends CombatentResource
+extends CombatantResource
 class_name EnemyResource
 
 #Mock

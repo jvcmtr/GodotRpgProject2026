@@ -9,4 +9,5 @@ speed_bonus = 5
 action_name = "Swing"
 action_description = "Pouco Dano"
 stamina_cost = 5
+max_number_of_targets = 1
 metadata/_custom_type_script = "uid://fx4d1oixirfu"

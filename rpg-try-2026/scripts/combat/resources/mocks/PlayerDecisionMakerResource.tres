@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayerDecisionMakerResource" format=3 uid="uid://c1h7tfbmd7rx5"]
+
+[ext_resource type="Script" uid="uid://c2hqqvl2sq3ks" path="res://scripts/combat/resources/PlayerDecisionMaker.gd" id="1_603tg"]
+
+[resource]
+script = ExtResource("1_603tg")
+metadata/_custom_type_script = "uid://c2hqqvl2sq3ks"

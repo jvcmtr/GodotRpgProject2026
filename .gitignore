@@ -7,8 +7,10 @@
 _docs_rpgsys/.obsidian/workspace.json
 _docs_rpgsys/.obsidian/plugins/**
 
+# Developer Notes
+_docs_rpgsys/4. DeveloperNotes/_RASC_TEMP/*
+
 # IDE related config
 .vscode/*
 # Hide those ugly .uid and .import files godot 4.6 is generating
 !.vscode/settings.json
-_docs_rpgsys/4. DeveloperNotes/_RASC_TEMP/*
