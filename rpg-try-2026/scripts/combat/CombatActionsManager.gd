@@ -12,7 +12,6 @@ var _handled_dict : Dictionary
 
 func initialize(manager : TurnManager):
 	gamestate = manager
-	on_stack_cleared.connect(func(): print("+++ STACK CLEARED EMMITTED"))
 
 func add_action(action: BaseCombatAction):
 	print("ADDED ACTION TO STACK")
@@ -29,7 +28,7 @@ func add_action(action: BaseCombatAction):
 	# HACK: Idealy we should emmit a signal like the example bellow to avoid coupling.
 	# 	action_declared.emit(action)
 	# But we need to garantee that all other actors handled the action before trying to resolve it
-	# The easiest way of doing that is by iterating over all combatants, and im going woth that since 
+	# The easiest way of doing that is by iterating over all combatants, and im going with that since 
 	# this code needs to be refactored anyway
 	for a in actors:
 		# HACK: This class should not be coupled with CombatantClass.IDecisionMaker (should not know of its existance or structrure)
